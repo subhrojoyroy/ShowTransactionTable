@@ -7,12 +7,14 @@ import com.show.transaction.entities.Parent;
 import com.show.transaction.entities.Transaction;
 import com.show.transaction.exception.TransactionNotFoundException;
 import com.show.transaction.services.TransactionService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class TransactionServiceImpl extends TransactionService {
     @Override
     public List<Transaction> getAllParentTransactions() throws TransactionNotFoundException {
