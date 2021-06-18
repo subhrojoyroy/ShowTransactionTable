@@ -18,7 +18,7 @@ public class ChildDao {
 
     public ChildDao() throws TransactionNotFoundException {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("E:\\IntelliJ-IDEA_Workspace\\ShowTransactions\\ShowTransactionTable\\src\\main\\resources\\Child.json"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("resources/Child.json"));
             Data data = gson.fromJson(bufferedReader, Data.class);
 
             for (Object o : data.getData()) {
