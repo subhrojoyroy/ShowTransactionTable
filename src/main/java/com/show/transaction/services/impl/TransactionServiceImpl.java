@@ -70,10 +70,4 @@ public class TransactionServiceImpl extends TransactionService {
 
         return transactions;
     }
-
-    public static void main(String[] args) throws TransactionNotFoundException {
-        for (Transaction t : new TransactionServiceImpl().getChildTransactions(1)) {
-            System.out.println(t);
-        }
-    }
 }
