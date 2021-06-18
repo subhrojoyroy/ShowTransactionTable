@@ -45,4 +45,35 @@ public class TransactionServiceImpl extends TransactionService {
 
         return transactions;
     }
+
+    @Override
+    public List<Transaction> getChildTransactions(int parentId) throws TransactionNotFoundException {
+        List<Transaction> transactions = new ArrayList<>();
+        try {
+            List<Child> children = new ChildDao().getChildren();
+            Parent parent = new ParentDao().getParent(parentId);
+            for (Child c : children) {
+                if (c.getParentId() == parentId) {
+                    Transaction transaction = new Transaction();
+                    transaction.setId(c.getId());
+                    transaction.setPaidAmount(c.getPaidAmount());
+                    transaction.setReceiver(parent.getReceiver());
+                    transaction.setSender(parent.getSender());
+                    transaction.setTotalAmount(parent.getTotalAmount());
+
+                    transactions.add(transaction);
+                }
+            }
+        } catch (TransactionNotFoundException e) {
+            throw new TransactionNotFoundException(e);
+        }
+
+        return transactions;
+    }
+
+    public static void main(String[] args) throws TransactionNotFoundException {
+        for (Transaction t : new TransactionServiceImpl().getChildTransactions(1)) {
+            System.out.println(t);
+        }
+    }
 }

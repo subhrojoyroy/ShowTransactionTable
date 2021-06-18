@@ -9,4 +9,6 @@ import java.util.List;
 @Service
 public abstract class TransactionService {
     abstract public List<Transaction> getAllParentTransactions() throws TransactionNotFoundException;
+
+    abstract public List<Transaction> getChildTransactions(int parentId) throws TransactionNotFoundException;
 }

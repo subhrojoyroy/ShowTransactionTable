@@ -39,4 +39,15 @@ public class ParentDao {
     public List<Parent> getParents() {
         return parents;
     }
+
+    public Parent getParent(int parentId) {
+        Parent parent = new Parent();
+        for(Parent p : parents) {
+            if(p.getId() == parentId) {
+                parent = p;
+                break;
+            }
+        }
+        return parent;
+    }
 }
