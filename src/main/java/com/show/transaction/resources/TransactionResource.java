@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,9 @@ public class TransactionResource {
             System.out.println(e);
             return new ResponseEntity(e.getLocalizedMessage(), HttpStatus.EXPECTATION_FAILED);
         }
+        if (responseBody.isEmpty()) {
+            return new ResponseEntity(new TransactionNotFoundException("No transaction Found"), HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity(responseBody, HttpStatus.OK);
     }
 
@@ -41,6 +45,9 @@ public class TransactionResource {
         } catch (TransactionNotFoundException e) {
             System.out.println(e);
             return new ResponseEntity(e.getLocalizedMessage(), HttpStatus.EXPECTATION_FAILED);
+        }
+        if (responseBody.isEmpty()) {
+            return new ResponseEntity(new TransactionNotFoundException(parentId), HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity(responseBody, HttpStatus.OK);
     }
