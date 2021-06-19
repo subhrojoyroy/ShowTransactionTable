@@ -26,8 +26,7 @@ public class TransactionServiceImpl extends TransactionService {
             for (Child c : children) {
                 Parent parent = new Parent();
                 parent.setId(c.getParentId());
-                long amount = paymentsDone.get(parent) == null ? c.getPaidAmount() : paymentsDone.get(parent) + c.getPaidAmount();
-                paymentsDone.put(parent, amount);
+                paymentsDone.put(parent, paymentsDone.getOrDefault(parent, 0l) + c.getPaidAmount());
             }
             for (Parent p : parents) {
                 Transaction transaction = new Transaction();
